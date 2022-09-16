@@ -13,25 +13,19 @@
         <form>
           <h1>Create your playlist</h1>
           <p>Search your favorite genre and we'll make a playlist and give some history of that genre</p>
-          <div class="input-group">
-            <span class="input-group-label"></span>
+          <div class="input-group">            
             <input class="input-group-field" type="search" placeholder="searching" required>
-            <button class="button">Search</button>
+            <button class="button" id="search-button">Search</button>
         </form>
       </div>
 
     </div>
 
-    <div class="parent">
-      <div class="box" id="spotify">Your Playlist</div>
-      <div class= "box" id="wiki">Info</div>
+    <div class="parent hide">
+      <div class="box" id="spotify"><h2 class="title">Your Playlist</h2></div>
+      <div class= "box" id="wiki"><h2 class="title">Info</h2></div>
     </div>
 </body>
-<script src="js/vendor/jquery.js"></script>
-<script src="js/vendor/what-input.js"></script>
-<script src="js/vendor/foundation.min.js"></script>
-<script>
-  $(document).foundation();
-</script>
+
 <script src="./assets/script.js"></script>
 </html>
