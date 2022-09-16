@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
-
-=======
-var dataName = document.querySelector('#data-name')
-var searchBtn = document.getElementById('search-button');
 var wikiInfo = document.querySelector('#wiki');
->>>>>>> Stashed changes
+var infoName = document.querySelector('#data-name');
+
 
 
 var apiController = (function() {
@@ -98,11 +94,47 @@ var appController = (function(uiCntrl, apiCntrl) {
     var searchBtn = document.getElementById('search-button');
 
     searchBtn.addEventListener('click',function(e){
-    e.preventDefault()
-    var appearEl = document.querySelector('.parent');
-    appearEl.classList.remove('hide');
+        e.preventDefault()
+        var appearEl = document.querySelector('.parent');
+        appearEl.classList.remove('hide');
+
+        function wikiDemo(){
+            var wikiURL = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + infoName.value + ' music' + '&format=json&prop=links&origin=*'
+            fetch(wikiURL)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(data){
+                console.log(data)
+                
+                var dataTop = document.createElement('h2');
+                var wikiData = document.createElement('p');
+                var str = data.query.search[0].snippet;
     
-<<<<<<< Updated upstream
+                str= str.replace(/<\/?span[^>]*>/g, '');
+                finalStr = str.split('.');
+                wikiData.textContent = finalStr[0];
+                dataTop.textContent = infoName.value + " Music"
+    
+                wikiInfo.append(dataTop, wikiData)
+    
+                var wikiLink = 'https://en.wikipedia.org/wiki/' + infoName.value + ' music'
+    
+                var moreInfo = document.createElement('p');
+                var linkEl = document.createElement('a');
+        
+                moreInfo.textContent = 'For more information please visit: ';
+                linkEl.href = wikiLink;
+                linkEl.textContent = wikiLink;
+        
+                wikiInfo.append(moreInfo, linkEl )
+    
+            })
+    
+    
+        } wikiDemo();
+    
+
     })
 
     return {
@@ -117,43 +149,5 @@ var appController = (function(uiCntrl, apiCntrl) {
 console.log()
 appController.init();
 
-=======
-    function wikiDemo(){
-        var wikiURL = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + dataName.value + ' music' + '&format=json&prop=links&origin=*'
-        fetch(wikiURL)
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(data){
-            console.log(data)
-            
-            var dataTop = document.createElement('h2');
-            var wikiData = document.createElement('p');
-            var str = data.query.search[0].snippet;
-
-            str= str.replace(/<\/?span[^>]*>/g, '');
-            finalStr = str.split('.');
-            wikiData.textContent = finalStr[0];
-            dataTop.textContent = dataName.value + " Music"
-
-            wikiInfo.append(dataTop, wikiData)
-
-            var wikiLink = 'https://en.wikipedia.org/wiki/' + dataName.value + ' music'
-
-            var moreInfo = document.createElement('p');
-            var linkEl = document.createElement('a');
-    
-            moreInfo.textContent = 'For more information please visit: ';
-            linkEl.href = wikiLink;
-            linkEl.textContent = wikiLink;
-    
-            wikiInfo.append(moreInfo, linkEl )
-
-        })
 
 
-    } wikiDemo();
-    
-    
-})
->>>>>>> Stashed changes
