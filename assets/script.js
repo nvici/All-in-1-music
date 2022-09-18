@@ -1,5 +1,6 @@
 var wikiInfo = document.querySelector('#wiki');
 var infoName = document.querySelector('#data-name');
+var spotifyTracks = document.querySelector('#spotify')
 
 
 
@@ -24,51 +25,27 @@ var apiController = (function() {
         return data.access_token;
     }
     
-    var _getGenres = async (token) => {
-
-        var result = await fetch('https://api.spotify.com/v1/recommendations', {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token}
-        });
-
-        var data = await result.json();
-        return data;
-    }
 
 
     return {
         getToken() {
             return _getToken();
         },
-
-        getGenres() {
-            return _getGenres();
-        }
-
     }
 })();
 
 // UI Module
 
-var uiController = (function() {
-
-
-    // holds token and input field as objects
-    var domElements = {
-        hftoken: '#hidden_token',
-        genre: '#'
-    }
-
-    
+var uiController = (function() { 
     //other public methods
     return {
         storeToken(value) {
-            document.querySelector(domElements.hftoken).value = value;
+            localStorage.setItem('token', value)
         },
         
         getStoredToken() {
             return {
-                token: document.querySelector(domElements.hftoken).value
+                token: localStorage.getItem('token')
             }
         }
     }
@@ -77,18 +54,16 @@ var uiController = (function() {
 
 var appController = (function(uiCntrl, apiCntrl) {
     
-    // gets input field info
-    // var domInputs = uiCntrl.inputField();
     
     // Gets token on page load
     var grabToken = async () => {
+
         // get token
         var token = await apiCntrl.getToken();
-        // store on page
-        uiCntrl.storeToken(token);
-        
-        
-        
+
+        // store in local storage
+        uiCntrl.storeToken(token);   
+
     }
     
     var searchBtn = document.getElementById('search-button');
@@ -97,8 +72,13 @@ var appController = (function(uiCntrl, apiCntrl) {
         e.preventDefault()
         var appearEl = document.querySelector('.parent');
         appearEl.classList.remove('hide');
-
+        function clearData(){
+            wikiInfo.innerHTML = '',
+            spotifyTracks.innerHTML = ''
+        }
+        
         function wikiDemo(){
+            clearData()
             var wikiURL = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + infoName.value + ' music' + '&format=json&prop=links&origin=*'
             fetch(wikiURL)
             .then(function(response){
@@ -111,7 +91,7 @@ var appController = (function(uiCntrl, apiCntrl) {
                 var wikiData = document.createElement('p');
                 var str = data.query.search[0].snippet;
     
-                str= str.replace(/<\/?span[^>]*>/g, '');
+                str = str.replace(/<\/?span[^>]*>/g, '');
                 finalStr = str.split('.');
                 wikiData.textContent = finalStr[0];
                 dataTop.textContent = infoName.value + " Music"
@@ -130,11 +110,51 @@ var appController = (function(uiCntrl, apiCntrl) {
                 wikiInfo.append(moreInfo, linkEl )
     
             })
-    
-    
-        } wikiDemo();
-    
+        
+        } wikiDemo()
 
+        function getGenrePlaylist(){
+
+            clearData()
+            var infoNameLower = infoName.value.toLowerCase()
+            var spotifyURL = 'https://api.spotify.com/v1/recommendations?seed_genres=' + infoNameLower
+            var token = localStorage.getItem('token')
+            fetch (spotifyURL, {
+                method: 'Get',
+                headers: { 'Authorization' : 'Bearer ' + token}
+            })
+
+            .then(function(response){
+                return response.json()
+            })
+
+            .then(function(data){
+                console.log(data);
+                
+                // iterates a list from the data pulled from spotify
+                for (let i = 0; i < 20; i++) {
+                    
+                    var listEl = document.createElement('li')
+                    var trackName = data.tracks[i].name
+                    var artist = data.tracks[i].artists[0].name
+                    var link = data.tracks[i].external_urls.spotify
+                    var fullInfo = trackName + ' by ' + artist
+                    var spotifyLink = document.createElement('a')
+                    spotifyLink.href = link
+                    spotifyLink.textContent = fullInfo
+                    
+                    spotifyTracks.append(listEl)
+                    listEl.append(spotifyLink)
+                    
+                 }
+            })
+            
+
+        }getGenrePlaylist()
+        
+
+        
+    
     })
 
     return {
@@ -146,8 +166,6 @@ var appController = (function(uiCntrl, apiCntrl) {
     }
 })(uiController, apiController);
 
-console.log()
 appController.init();
-
 
 
