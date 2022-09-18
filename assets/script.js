@@ -131,6 +131,7 @@ var appController = (function(uiCntrl, apiCntrl) {
             .then(function(data){
                 console.log(data);
                 
+                // iterates a list from the data pulled from spotify
                 for (let i = 0; i < 20; i++) {
                     
                     var listEl = document.createElement('li')
