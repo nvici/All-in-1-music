@@ -111,7 +111,6 @@ var appController = (function(uiCntrl, apiCntrl) {
     
             })
         
-        
         } wikiDemo()
 
         function getGenrePlaylist(){
