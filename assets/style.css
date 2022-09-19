@@ -23,14 +23,10 @@ body {
     color: #1DB954;
     display: inline-block;
     padding: 10px 15px;
-
-    
   }
 /*this css is the css of the 2 divs*/
 .parent {
   display: flex;
-
-   
 }
 
 .box{
@@ -42,8 +38,6 @@ body {
   border: 1px solid #1DB954;
   background-color: #191414;
   color: #1DB954;
- 
-  
 }
 
 
@@ -53,4 +47,23 @@ body {
   text-decoration-line: underline;
   color: #1DB954 ;
 }
- 
+
+.footer {
+  position: fixed;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: bold;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(25,20,20);
+  color: white;
+  text-align: center;
+  padding: 25px;
+  border-top: #1DB954 solid;
+  border-top-width: 2px;
+}
+
+.spotify-logo {
+  width: 100px;
+  height: 30px;
+}
