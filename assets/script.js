@@ -5,7 +5,7 @@ var infoName = document.querySelector('#data-name');
 var spotifyTracks = document.querySelector('#spotify')
 
 
-
+//module that controls API
 var apiController = (function() {
 
     var clientId = '76ff871267734d8eb366e5fc36d123a3';
@@ -29,6 +29,7 @@ var apiController = (function() {
     
 
 
+    //allows _getToken to be used outside of the controller
     return {
         getToken() {
             return _getToken();
@@ -36,8 +37,7 @@ var apiController = (function() {
     }
 })();
 
-// UI Module
-
+// module that controls UI
 var uiController = (function() { 
     //other public methods
     return {
@@ -54,6 +54,7 @@ var uiController = (function() {
     
 })();
 
+//module that controls the integration of API and UI
 var appController = (function(uiCntrl, apiCntrl) {
     
     
@@ -116,6 +117,7 @@ var appController = (function(uiCntrl, apiCntrl) {
         
         } wikiDemo()
 
+        //calls the genre playlist on button click
         function getGenrePlaylist(){
 
             clearData()
@@ -160,6 +162,7 @@ var appController = (function(uiCntrl, apiCntrl) {
     
     })
 
+    //allows token to be loaded on page load
     return {
         init() {
             console.log('Starting the page');
@@ -169,5 +172,6 @@ var appController = (function(uiCntrl, apiCntrl) {
     }
 })(uiController, apiController);
 
+//allows APP module to be utilized on page load
 appController.init();
 
