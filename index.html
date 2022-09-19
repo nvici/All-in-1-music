@@ -10,23 +10,35 @@
 </head>
 <body>
     <div class="playlist-form">
-      
+
         <form>
           <h1>Create your playlist</h1>
           <p>Search your favorite genre and we'll make a playlist and give some history of that genre</p>
           <div class="input-group">            
             <input class="input-group-field" type="search" id="data-name" placeholder="searching" required>
             <button class="button" id="search-button">Search</button>
+          </div>
         </form>
-      </div>
-
     </div>
-
+<!--These divs contain the information that when form is submitted two divs appear-->
     <div class="parent hide">
       <div class="box" id="spotify"><h2 class="title">Your Playlist</h2></div>
       <div class= "box" id="wiki"><h2 class="title">Info</h2></div>
     </div>
-</body>
+    
+    <footer>
+      <div class="footer">
+        <p>Powered by <a
+          href="https://www.spotify.com/"
+          title="Powered by Spotify"</p>
 
+          <img
+            src="./assets/Spotify_Logo_CMYK_White.png"
+            class="spotify-logo"
+          />
+      </div>
+    </footer>
+</body>
+<!--js file linked-->
 <script src="./assets/script.js"></script>
 </html>
