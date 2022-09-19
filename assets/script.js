@@ -79,28 +79,28 @@ var appController = (function(uiCntrl, apiCntrl) {
             spotifyTracks.innerHTML = ''
         }
         
-        function wikiDemo(){
+        function wikiDemo(){  //function that calls for the wikipedia API
             clearData()
-            var wikiURL = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + infoName.value + ' music' + '&format=json&prop=links&origin=*'
+            var wikiURL = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + infoName.value + ' music' + '&format=json&prop=links&origin=*' 
             fetch(wikiURL)
-            .then(function(response){
+            .then(function(response){ // .then to take the response from API.
                 return response.json()
             })
             .then(function(data){
                 console.log(data)
                 
-                var dataTop = document.createElement('h2');
+                var dataTop = document.createElement('h2');  //create the elements where the data can be pulled and listed from the wikiURL.
                 var wikiData = document.createElement('p');
                 var str = data.query.search[0].snippet;
     
-                str = str.replace(/<\/?span[^>]*>/g, '');
+                str = str.replace(/<\/?span[^>]*>/g, '');  // takes out text from the snippet that does not need to be in there.
                 finalStr = str.split('.');
                 wikiData.textContent = finalStr[0];
                 dataTop.textContent = infoName.value + " Music"
     
                 wikiInfo.append(dataTop, wikiData)
     
-                var wikiLink = 'https://en.wikipedia.org/wiki/' + infoName.value + ' music'
+                var wikiLink = 'https://en.wikipedia.org/wiki/' + infoName.value + ' music'  // wikipedia link to be presented with the value from infoName. 
     
                 var moreInfo = document.createElement('p');
                 var linkEl = document.createElement('a');
