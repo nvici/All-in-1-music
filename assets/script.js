@@ -1,3 +1,5 @@
+var dataName = document.querySelector('#data-name')
+var searchBtn = document.getElementById('search-button');
 var wikiInfo = document.querySelector('#wiki');
 var infoName = document.querySelector('#data-name');
 var spotifyTracks = document.querySelector('#spotify')
@@ -65,7 +67,7 @@ var appController = (function(uiCntrl, apiCntrl) {
         uiCntrl.storeToken(token);   
 
     }
-    
+    //When search is clicked it pops out the 2 hidden divs
     var searchBtn = document.getElementById('search-button');
 
     searchBtn.addEventListener('click',function(e){
@@ -167,5 +169,4 @@ var appController = (function(uiCntrl, apiCntrl) {
 })(uiController, apiController);
 
 appController.init();
-
 
