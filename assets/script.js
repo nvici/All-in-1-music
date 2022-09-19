@@ -1,3 +1,5 @@
+var dataName = document.querySelector('#data-name')
+var searchBtn = document.getElementById('search-button');
 var wikiInfo = document.querySelector('#wiki');
 var infoName = document.querySelector('#data-name');
 var spotifyTracks = document.querySelector('#spotify')
@@ -167,5 +169,4 @@ var appController = (function(uiCntrl, apiCntrl) {
 })(uiController, apiController);
 
 appController.init();
-
 
