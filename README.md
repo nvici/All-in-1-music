@@ -37,5 +37,5 @@ MIT License
 
 - Repository: https://github.com/nvici/All-in-1-music
 
-- Live URL: https://github.com/nvici/All-in-1-music/
+- Live URL: https://nvici.github.io/All-in-1-music/
 
