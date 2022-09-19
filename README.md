@@ -30,6 +30,8 @@ Music data for playlists provided by [Spotify](	https://api.spotify.com/v1/recom
 
 Genre data provided by [Wikipedia](https://en.wikipedia.org/wiki/)
 
+CSS Framework provided by [Foundation](https://get.foundation/)
+
 ## License
 MIT License
 
