@@ -67,7 +67,7 @@ var appController = (function(uiCntrl, apiCntrl) {
         uiCntrl.storeToken(token);   
 
     }
-    
+    //When search is clicked it pops out the 2 hidden divs
     var searchBtn = document.getElementById('search-button');
 
     searchBtn.addEventListener('click',function(e){
